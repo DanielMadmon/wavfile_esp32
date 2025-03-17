@@ -96,7 +96,7 @@ static int _read_header(FILE *fp, wav_riff_t *riff, wav_fmt_t *fmt, wav_data_t *
     }
 
     if (riff->size != fileSize - chunkInfoSize) {
-        LogE("riff->id: %u is not RIFF!\n", riff->size);
+        LogE("riff->id: %u is not RIFF! size mismatch\n", riff->size);
         return -1;
     }
 

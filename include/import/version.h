@@ -12,8 +12,6 @@
 extern "C" {
 #endif
 
-#define TAG 	"WAVFILE"
-
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
 
@@ -29,7 +27,10 @@ extern "C" {
 #else
 #define VERSION_NUM  (((MAJOR)%100)*10000 + ((MINOR)%100)*100 + ((REVISION)%100))
 #define VERSION_STRING TOSTRING(MAJOR) "." TOSTRING(MINOR) "." TOSTRING(REVISION)
-#define VERSION_TEXT TAG " v" VERSION_STRING "." CID "(" BUILD_TIME ")"
+#ifdef ESP_PLATFORM
+#define TAG "wav_lib"
+#endif
+#define VERSION_TEXT TAG " v" VERSION_STRING
 #endif
 
 #ifdef __cplusplus

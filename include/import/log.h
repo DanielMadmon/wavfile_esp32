@@ -14,6 +14,7 @@ extern "C" {
 
 #include "import/version.h"
 
+
 #ifdef __unix__
 #define Log printf
 #define LogV printf
@@ -21,6 +22,16 @@ extern "C" {
 #define LogI printf
 #define LogW printf
 #define LogE printf
+
+#elif defined(ESP_PLATFORM)
+#include "esp_log.h"
+#define TAG "wav_lib"
+#define Log(f, ...) ESP_LOGI(TAG,f, ##__VA_ARGS__)
+#define LogV(f, ...) ESP_LOGV(TAG,f, ##__VA_ARGS__)
+#define LogD(f, ...) ESP_LOGD(TAG,f, ##__VA_ARGS__)
+#define LogI(f, ...) ESP_LOGI(TAG,f, ##__VA_ARGS__)
+#define LogW(f, ...) ESP_LOGW(TAG,f, ##__VA_ARGS__)
+#define LogE(f, ...) ESP_LOGE(TAG,f, ##__VA_ARGS__)
 
 #elif defined(__ANDROID__)
 #include <android/log.h>

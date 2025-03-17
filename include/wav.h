@@ -14,6 +14,13 @@ extern "C" {
 
 #include <stdio.h>
 
+#define VS_CODE_IDF_FIX
+
+#ifdef VS_CODE_IDF_FIX
+	#define ESP_PLATFORM 1
+	#undef __unix__
+#endif
+
 #if (!(defined API_CALL) || !(defined API_IMPORT_OR_EXPORT))
 	#if defined _WIN32
 		#if defined _WIN64
@@ -31,6 +38,9 @@ extern "C" {
 	#elif defined __unix__
 		#define API_CALL
 		#define API_IMPORT_OR_EXPORT __attribute ((visibility("default")))
+	#elif defined ESP_PLATFORM
+		#define API_CALL 
+		#define API_IMPORT_OR_EXPORT __attribute__ ((visibility("default")))
 	#else
 		#define API_CALL
 		#define API_IMPORT_OR_EXPORT
